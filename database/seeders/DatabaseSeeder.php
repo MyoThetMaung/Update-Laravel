@@ -1,0 +1,31 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Blog;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        User::truncate();
+        Category::truncate();                                                               //truncate means delete all before seeding
+        Blog::truncate();
+
+        $frontend = Category::factory()->create(["name" => "Frontend"]);
+        $backend = Category::factory()->create(["name" => "backend"]);
+
+        Blog::factory(3)->create(["category_id" => $frontend->id]);
+        Blog::factory(3)->create(["category_id" => $backend->id]);
+
+    }
+}
