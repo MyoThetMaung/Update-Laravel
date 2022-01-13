@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::truncate();
-        Category::truncate();                                                               //truncate means delete all before seeding
         Blog::truncate();
+        Category::truncate();                                                                               //truncate means delete all before seeding
 
-        $frontend = Category::factory()->create(["name" => "Frontend"]);
-        $backend = Category::factory()->create(["name" => "backend"]);
-
-        Blog::factory(3)->create(["category_id" => $frontend->id]);
-        Blog::factory(3)->create(["category_id" => $backend->id]);
-
+        $mgmg = User::factory()->create(['name'=>'mgmg', 'username'=>'mgmg']);
+        $agag = User::factory()->create(['name'=>'agag', 'username'=>'agag']);
+        $frontend = Category::factory()->create(['name'=>'frontend', 'filename'=>'frontend']);
+        $backend = Category::factory()->create(['name'=>'backend', 'filename'=>'backend']);
+        Blog::factory(2)->create(['category_id'=>$frontend->id, 'user_id'=>$mgmg->id]);
+        Blog::factory(2)->create(['category_id'=>$backend->id, 'user_id'=>$agag->id]);
     }
 }
